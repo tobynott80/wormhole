@@ -21,6 +21,9 @@ build:gradle:
   stage: build
   only:
     - tags
+  tags: 
+    - comsc-ci
+    
   script:
     - ./gradlew buildAndReport
   artifacts:
@@ -35,6 +38,9 @@ build:gradle:
 pages:
 
   stage: publish
+  tags: 
+    - comsc-ci
+
 
 
   script:
