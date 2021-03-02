@@ -102,4 +102,4 @@ pitest {
 
 }
 
-check.dependsOn("pitest")
+check.dependsOn("pitest") //comment this line out if your build fails with the 'CoverageMinion' error.
