@@ -10,7 +10,7 @@
         </File>
         <RollingFile
                 name="rollingFile"
-                fileName="./wormhole.log"
+                fileName="./wormhole-roll.log"
                 filePattern="./wormhole.%d{dd-MMM}.log.gz"
                 ignoreExceptions="false">
             <PatternLayout>
