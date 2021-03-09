@@ -25,7 +25,7 @@ public final class Application {
 
     logger.info("Application Started with args:{}", String.join(",", args));
 
-    System.out.println("Hello World.  Welcome to Wormhole!");
+    System.out.println("Hello World.  Welcome to Wormhole!!");
 
     logger.info("Application closing");
   }
