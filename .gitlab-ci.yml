@@ -36,13 +36,7 @@ build:gradle:
     expire_in: 1 week
 
 
-            - mkdir .public
-            - cd .public
-            - echo "<HTML><HEAD></HEAD><BODY><H1>Latest Test Report</H1><DIV><A href=http://"$GITLAB_USER_LOGIN".pages.cs.cf.ac.uk/"$CI_PROJECT_NAME"/tests/test/>Results</A></DIV></BODY></HTML>" > index.html
-            - cd ..
-            - cp -r ./build/reports/tests/ .public
-            - mv .public public
-            - ls -lR ./public
+
 
 
 pages:
