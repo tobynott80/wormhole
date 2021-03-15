@@ -36,6 +36,15 @@ build:gradle:
     expire_in: 1 week
 
 
+            - mkdir .public
+            - cd .public
+            - echo "<HTML><HEAD></HEAD><BODY><H1>Latest Test Report</H1><DIV><A href=http://"$GITLAB_USER_LOGIN".pages.cs.cf.ac.uk/"$CI_PROJECT_NAME"/tests/test/>Results</A></DIV></BODY></HTML>" > index.html
+            - cd ..
+            - cp -r ./build/reports/tests/ .public
+            - mv .public public
+            - ls -lR ./public
+
+
 pages:
 
   stage: publish
@@ -46,14 +55,21 @@ pages:
 
   script:
     - pwd
-    - mkdir ~/public/jars
-    - cd $CURRDIR
-    - mv ./build/reports/tests/ ~/public
-    - mv ./build/reports/checkstyle/ ~/public
-    - mv ./build/jacocoHtml/ ~/public
-    - mv ./build/libs/*.jar ~/public/jars
+    - mkdir .public
+    - cd .public
+    - mkdir jars
+    - echo "<HTML><HEAD></HEAD><BODY><H1>Latest Test Report</H1><DIV><A href=http://"$GITLAB_USER_LOGIN".pages.cs.cf.ac.uk/"$CI_PROJECT_NAME"/tests/test/>Results</A></DIV></BODY></HTML>" > index.html
+    - cd ..
+  
+    - cp -r ./build/reports/tests/ .public
+    - cp -r ./build/reports/checkstyle/ .public
+    - cp -r ./build/jacocoHtml/ .public
+    - cp -r ./build/libs/*.jar .public/jars
+    - mv .public public
     - pwd
     - ls -lR public
+
+
 
   artifacts:
     paths:
