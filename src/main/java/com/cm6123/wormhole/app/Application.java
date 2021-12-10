@@ -5,30 +5,30 @@ import org.slf4j.LoggerFactory;
 
 
 public final class Application {
-  /**
-   * Create a logger for the class.
-   */
-  private static Logger logger = LoggerFactory.getLogger(Application.class);
+    /**
+     * Create a logger for the class.
+     */
+    private static Logger logger = LoggerFactory.getLogger(Application.class);
 
 
-  private Application() {
-  }
+    private Application() {
+    }
 
-  /**
-   * main entry point.  If args provided, result is displayed and program exists. Otherwise, user is prompted for
-   * input.
-   *
-   * @param args command line args.
-   */
-  public static void main(final String[] args) {
+    /**
+     * main entry point.  If args provided, result is displayed and program exists. Otherwise, user is prompted for
+     * input.
+     *
+     * @param args command line args.
+     */
+    public static void main(final String[] args) {
 
 
-    logger.info("Application Started with args:{}", String.join(",", args));
+        logger.info("Application Started with args:{}", String.join(",", args));
 
-    System.out.println("Hello World.  Welcome to Wormhole.");
+        System.out.println("Hello World.  Welcome to Wormhole.");
 
-    logger.info("Application closing");
-  }
+        logger.info("Application closing");
+    }
 
 
 }
