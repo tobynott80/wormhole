@@ -27,6 +27,8 @@ dependencies {
     testImplementation(platform('org.junit:junit-bom:5.7.0'))
     testImplementation('org.junit.jupiter:junit-jupiter')
     testImplementation('org.mockito:mockito-core:2.+')
+    testCompile("org.junit.jupiter:junit-jupiter-params:5.7.0")
+
 }
 
 //test configuration
@@ -37,6 +39,11 @@ test{
     }
 }
 //application configuration
+
+run{
+    standardInput = System.in
+}
+
 jar {
     manifest {
         attributes 'Main-Class': 'com.cm6123.wormhole.app.Application'
@@ -72,6 +79,7 @@ jacocoTestReport {
 jacocoTestCoverageVerification {
     violationRules {
         rule {
+            element = 'CLASS'
             limit {
                 counter = 'BRANCH'
                 value = 'COVEREDRATIO'
@@ -99,4 +107,4 @@ pitest {
 
 }
 
-check.dependsOn("pitest")
+check.dependsOn("pitest") //comment this line out if your build fails with the 'CoverageMinion' error.
