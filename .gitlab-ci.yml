@@ -7,6 +7,7 @@ default:
 
 
 stages:
+  - assemble
   - build
   - publish
   - deploy
@@ -23,6 +24,13 @@ cache:
     - .gradle/wrapper
     - .gradle/caches
 
+assemble:gradle:
+  stage: assemble
+  only:
+    - tags
+  script:
+    - ./gradlew shadowJar
+
 build:gradle:
   stage: build
   only:
@@ -36,6 +44,7 @@ build:gradle:
       - ./build/reports/checkstyle/
       - ./build/jacocoHtml
       - ./build/libs/*.jar
+      - ./build/reports/pitest
     expire_in: 4 week
 
 
@@ -48,6 +57,7 @@ pages:
     - pwd
     - mv ./build/reports/tests/ public
     - mv ./build/reports/checkstyle/ public
+    - mv ./build/reports/pitest/ public
     - mv ./build/jacocoHtml/ public
     - mv ./build/libs/*.jar public
     - pwd
