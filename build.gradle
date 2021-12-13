@@ -4,8 +4,8 @@ plugins {
     id 'checkstyle'
     id 'idea'
     id 'application'
-    id 'com.github.johnrengelman.shadow' version '6.1.0'
-    id 'info.solidsoft.pitest' version '1.5.1'
+    id 'com.github.johnrengelman.shadow' version '7.1.0'
+    id 'info.solidsoft.pitest' version '1.7.0'
 
 }
 group 'com.nsa.cm6123-6623'
@@ -19,15 +19,15 @@ repositories {
 
 dependencies {
 
-    implementation 'org.apache.logging.log4j:log4j-api:2.7'
-    implementation 'org.apache.logging.log4j:log4j-core:2.7'
-    implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.7'
+    implementation 'org.apache.logging.log4j:log4j-api:2.14.1'
+    implementation 'org.apache.logging.log4j:log4j-core:2.14.1'
+    implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.14.1'
 
 
     testImplementation(platform('org.junit:junit-bom:5.7.0'))
-    testImplementation('org.junit.jupiter:junit-jupiter')
-    testImplementation('org.mockito:mockito-core:2.+')
-    testCompile("org.junit.jupiter:junit-jupiter-params:5.7.0")
+    testImplementation('org.junit.jupiter:junit-jupiter:5.8.2')
+    testImplementation('org.mockito:mockito-core:4.1.0')
+    testImplementation("org.junit.jupiter:junit-jupiter-params:5.8.2")
 
 }
 
@@ -65,7 +65,7 @@ checkstyle {
 }
 
 checkstyleMain {
-    configFile = file("${configDir}/checkstyleMain.xml")
+    configFile = file("config/checkstyle/checkstyleMain.xml")
     maxErrors = 10
 }
 
@@ -99,12 +99,17 @@ task buildAndReport {
 
 pitest {
     targetClasses = ['com.cm6123.wormhole.*']  //by default "${project.group}.*"
+    excludedClasses = ['com.cm6123.wormhole.app.*']
     //pitestVersion = '1.4.1' //not needed when a default PIT version should be used
     threads = 4
     outputFormats = ['XML', 'HTML']
     timestampedReports = false
-    junit5PluginVersion = '0.12'
-
+    junit5PluginVersion = '0.15'
 }
 
 check.dependsOn("pitest") //comment this line out if your build fails with the 'CoverageMinion' error.
+
+
+rootProject.tasks.named("jar") {
+    duplicatesStrategy = 'include'
+}
