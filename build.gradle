@@ -83,7 +83,7 @@ jacocoTestCoverageVerification {
             limit {
                 counter = 'BRANCH'
                 value = 'COVEREDRATIO'
-                minimum = 0.5
+                minimum = 0.6
             }
             excludes = [
                     'com.cm6123.wormhole.app.*'
