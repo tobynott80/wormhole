@@ -9,7 +9,7 @@
             </PatternLayout>
         </File>
         <RollingFile
-                name="rollingFile"
+                name="RollingFile"
                 fileName="./wormhole-roll.log"
                 filePattern="./wormhole.%d{dd-MMM}.log.gz"
                 ignoreExceptions="false">
@@ -23,8 +23,8 @@
         </RollingFile>
     </Appenders>
     <Loggers>
-        <Root level="info">
-            <AppenderRef ref="rollingFile"/>
+        <Root level="trace">
+            <AppenderRef ref="RollingFile"/>
         </Root>
     </Loggers>
 </Configuration>

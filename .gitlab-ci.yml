@@ -44,6 +44,7 @@ build:gradle:
       - ./build/reports/checkstyle/
       - ./build/jacocoHtml
       - ./build/libs/*.jar
+      - ./build/libs/*.log
       - ./build/reports/pitest
     expire_in: 4 week
 
@@ -60,6 +61,7 @@ pages:
     - mv ./build/reports/pitest/ public
     - mv ./build/jacocoHtml/ public
     - mv ./build/libs/*.jar public
+    - mv ./build/libs/*.log public
     - pwd
     - ls -lR public
 

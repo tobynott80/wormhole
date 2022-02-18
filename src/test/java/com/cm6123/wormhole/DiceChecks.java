@@ -1,7 +1,8 @@
 package com.cm6123.wormhole;
 
-
 import com.cm6123.wormhole.dice.Dice;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -31,11 +32,15 @@ public class DiceChecks {
       max = max > roll ? max : roll;
     }
 
+    final Integer lastMax = max;
+    final Integer lastMin = min;
 
     //NOTE: Java autoboxing rules will catch you here! a==b will compare references. a == 1 will unbox and compare values!!!
 
-    assertTrue(max.equals(faces), "max doesn't equal number of faces, but actually equals " + max);
-    assertTrue(min.equals(1), "min does't equal 1, but actually equals " + min);
+    Assertions.assertAll(
+            () -> assertTrue(lastMax.equals(faces), "max doesn't equal number of faces, but actually equals " + lastMax),
+            () -> assertTrue(lastMin.equals(1), "min does't equal 1, but actually equals " + lastMin)
+                        );
 
   }
 
@@ -51,7 +56,9 @@ public class DiceChecks {
       values.add(aDice.roll());
     }
 
+
     assertTrue(values.size() == faces);
+
   }
 
   @ParameterizedTest
@@ -72,8 +79,13 @@ public class DiceChecks {
       assertTrue(valueCount.get(eachFace) >= rolls / (faces * 2));
     }
 
-
   }
 
+  @Test
+  void rollOnce() {
+    Dice aDice = new Dice(6);
+    Integer roll = aDice.roll();
+    assertTrue(roll <= 6 && roll >= 1);
+  }
 
 }
