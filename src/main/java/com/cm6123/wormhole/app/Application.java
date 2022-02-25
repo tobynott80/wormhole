@@ -27,6 +27,8 @@ public final class Application {
 
         System.out.println("Hello World.  Welcome to Wormhole.");
 
+
+
         logger.info("Application closing");
     }
 
