@@ -114,3 +114,6 @@ fabric.properties
 
 # Log files
 *.log.gz
+
+# Reference Files
+/Reference/
