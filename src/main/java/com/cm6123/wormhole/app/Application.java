@@ -1,6 +1,6 @@
 package com.cm6123.wormhole.app;
 
-import com.cm6123.wormhole.game.GameBoard;
+import com.cm6123.wormhole.board.GameBoard;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.Scanner;

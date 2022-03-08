@@ -1,4 +1,4 @@
-package com.cm6123.wormhole.game;
+package com.cm6123.wormhole.board;
 
 import java.util.Scanner;
 
