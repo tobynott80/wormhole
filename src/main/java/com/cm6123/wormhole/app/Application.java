@@ -30,7 +30,21 @@ public final class Application {
         boolean playAgain = true;
         while (playAgain) {
 
-            GameBoard gb = new GameBoard();
+            //code adapted from:
+            // https://stackoverflow.com/questions/3059333/validating-input-using-java-util-scanner
+
+            Scanner sc = new Scanner(System.in);
+            int boardWidth;
+            do {
+                System.out.println("Please enter the width dimension of your board? (integer between 5-10)");
+                while (!sc.hasNextInt()) { //ensuring a valid number is entered.
+                    System.out.println("Please enter a number between 5 and 10");
+                    sc.next();
+                }
+                boardWidth = sc.nextInt();
+            } while (boardWidth < 5 || boardWidth > 10); //ensure that the entered width is within the valid range.
+            logger.info("Creating a gameboard with width " + boardWidth + " and of size " + boardWidth * boardWidth);
+            GameBoard gb = new GameBoard(boardWidth);
 
             String usrIput = "";
             boolean validInput = false;
@@ -51,6 +65,8 @@ public final class Application {
 
         logger.info("Application closing");
     }
+
+
 
 
 }

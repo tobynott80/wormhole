@@ -11,8 +11,11 @@ public class Player {
         position = startingPosition;
     }
 
+    /**
+     * Constructor creating new player at position 1
+     */
     public Player() {
-        position = 1;
+        this.position = 1;
     }
 
     public int getPosition() {
