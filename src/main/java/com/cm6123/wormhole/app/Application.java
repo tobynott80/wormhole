@@ -28,20 +28,19 @@ public final class Application {
 
         System.out.println("Hello World.  Welcome to Wormhole.");
         boolean playAgain = true;
-        while (playAgain){
+        while (playAgain) {
 
             GameBoard gb = new GameBoard();
 
             String usrIput = "";
             boolean validInput = false;
-            while(!validInput){
+            while (!validInput) {
                 System.out.println("Would you like to play again? (Type 'Y' to play again, or 'N' to exit)");
                 Scanner inputObj = new Scanner(System.in);
                 usrIput = inputObj.nextLine();
-                if (usrIput.toUpperCase().equals("Y")){
+                if (usrIput.toUpperCase().equals("Y")) {
                     validInput = true;
-                }
-                else if (usrIput.toUpperCase().equals("N")){
+                } else if (usrIput.toUpperCase().equals("N")) {
                     validInput = true;
                     playAgain = false;
                 }
