@@ -3,7 +3,7 @@ package com.cm6123.wormhole;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-import com.cm6123.wormhole.game.GameBoard;
+import com.cm6123.wormhole.board.GameBoard;
 
 
 
