@@ -36,4 +36,15 @@ public class PlayerController {
             i++;
         }
     }
+
+    public boolean gameOver(final int noOfSquares) {
+        for (Player player : playerList) {
+            if (player.getPosition() > noOfSquares){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        return false;
+    }
 }
