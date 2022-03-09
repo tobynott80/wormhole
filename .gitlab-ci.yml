@@ -4,6 +4,7 @@ default:
   tags:
     #- comsc-ci
     - general-docker
+    - tobyn
 
 
 stages:
