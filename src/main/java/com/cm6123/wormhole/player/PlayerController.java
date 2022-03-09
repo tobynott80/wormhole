@@ -9,7 +9,7 @@ public class PlayerController {
     /**
      * Number of players requested by the user(s).
      */
-    private int noOfPlayers;
+    private final int noOfPlayers;
 
     /**
      * Array list to hold each player objects
@@ -37,6 +37,11 @@ public class PlayerController {
         }
     }
 
+    /**
+     * Method to check if game is over
+     * @param noOfSquares number of squares on gameboard
+     * @return Boolean returned to determine if game is over or not
+     */
     public boolean gameOver(final int noOfSquares) {
         for (Player player : playerList) {
             if (player.getPosition() > noOfSquares){
