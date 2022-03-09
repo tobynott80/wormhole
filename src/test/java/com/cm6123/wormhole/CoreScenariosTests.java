@@ -79,4 +79,9 @@ public class CoreScenariosTests {
         }
 
     }
+    @Test
+    public void shouldBeAbleToCompleteTest4 (){
+        //See CoreScenarios.md test 4
+
+    }
 }
