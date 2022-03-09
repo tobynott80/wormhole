@@ -58,7 +58,7 @@ pages:
     - pwd
     - mv ./build/reports/tests/ public
     - mv ./build/reports/checkstyle/ public
-    - mv ./build/reports/pitest/ public
+    #- mv ./build/reports/pitest/ public
     - mv ./build/jacocoHtml/ public
     - mv ./build/libs/*.jar public
     - pwd
