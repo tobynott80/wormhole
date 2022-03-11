@@ -1,6 +1,8 @@
 package com.cm6123.wormhole.board;
 
 
+import java.util.ArrayList;
+
 /**
  * Class to manage the actions and methods of the gameboard.
  */
@@ -16,7 +18,7 @@ public final class GameBoard {
      */
     public GameBoard(final int width) {
         this.boardWidth = width;
-
+        ArrayList<Wormhole> wormholeList = new ArrayList<Wormhole>();
     }
 
 
