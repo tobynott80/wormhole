@@ -82,6 +82,18 @@ public class CoreScenariosTests {
     @Test
     public void shouldBeAbleToCompleteTest4 (){
         //See CoreScenarios.md test 4
-
+        //A game is being played on a board of size 5 with a positive wormhole from square 6 to square 20
+        // and all players are on square 1 and it is player 1's turn
+        // 
+        // Player 1 rolls a 4 and 2 
+        //  
+        // Then Player 1 should be on square 20 and it is player 2's turn 
+        GameBoard gb = new GameBoard(5);
+        PlayerController controller = new PlayerController(2);
+        controller.initialisePlayers(1);
+        gb.addPositiveWormhole(6,20);
+        controller.playerList.get(0).movePlayer(4);
+        controller.playerList.get(0).movePlayer(2);
+        assertTrue(controller.checkWormholes(););
     }
 }

@@ -29,4 +29,8 @@ public final class GameBoard {
     }
 
 
+    public void addPositiveWormhole(int entry, int exit) {
+
+
+    }
 }
