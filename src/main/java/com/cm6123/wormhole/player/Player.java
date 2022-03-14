@@ -1,9 +1,14 @@
 package com.cm6123.wormhole.player;
 
+import com.cm6123.wormhole.board.GameBoard;
+import com.cm6123.wormhole.board.Wormhole;
+import com.cm6123.wormhole.board.WormholeEntry;
+import com.cm6123.wormhole.board.WormholeType;
+
 /**
  * Class to manage an individual player and their actions.
  */
-public final class Player {
+public class Player {
 
     /**
      * Integer variable with the square position of the current location of the player.
@@ -12,6 +17,7 @@ public final class Player {
 
     /**
      * Constructor for mostly testing purposes to define the players initial starting position.
+     *
      * @param startingPosition Location for where player starts. Default is 1
      */
     public Player(final int startingPosition) {
@@ -33,11 +39,20 @@ public final class Player {
     }
 
     /**
+     * Main function to move the player after rolling dice.
      * @param squareDistance How many squares should player be moved
      */
     public void movePlayer(final int squareDistance) {
         int targetSquare = this.getPosition() + squareDistance;
-        System.out.println(targetSquare);
-        position = targetSquare;
+        position = targetSquare; //move the player to the
+        for (WormholeEntry wormhole : GameBoard.entryWormholeList) {
+            if (targetSquare == wormhole.getPosition()) {
+                //player has landed on a wormhole, change postion to the nearest exit wormhole
+                //If no exit wormhole is provided, .getExit() will just return the current position.
+                position = wormhole.getExit();
+            }
+        }
+
+
     }
 }

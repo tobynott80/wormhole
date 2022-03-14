@@ -1,11 +1,14 @@
 package com.cm6123.wormhole.player;
 
+import com.cm6123.wormhole.board.GameBoard;
+import com.cm6123.wormhole.board.Wormhole;
+
 import java.util.ArrayList;
 
 /**
  * Class to combine players together and handle interactions across all players.
  */
-public class PlayerController {
+public class PlayerController{
     /**
      * Number of players requested by the user(s).
      */
@@ -49,6 +52,19 @@ public class PlayerController {
             }else{
                 return false;
             }
+        }
+        return false;
+    }
+
+    public boolean checkWormholes() {
+        for (Player player: playerList) {
+            for (Wormhole wormhole: GameBoard.entryWormholeList){
+                if (player.getPosition() == wormhole.getPosition()){
+                    //player has landed on a wormhole
+                    return true;
+                }
+            }
+
         }
         return false;
     }
