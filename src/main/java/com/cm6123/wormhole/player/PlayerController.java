@@ -45,9 +45,10 @@ public final class PlayerController {
      * @param noOfSquares number of squares on gameboard
      * @return Boolean returned to determine if game is over or not
      */
-    public boolean gameOver(final int noOfSquares) {
+    public boolean gameOver() {
+        int noOfSquares = GameBoard.getBoardSize();
         for (Player player : playerList) {
-            if (player.getPosition() > noOfSquares){
+            if (player.getPosition() >= noOfSquares){
                 return true;
             }else{
                 return false;

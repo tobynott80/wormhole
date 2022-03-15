@@ -52,7 +52,7 @@ public class CoreScenariosTests {
         controller.initialisePlayers(1); //initialise players starting at 1
         controller.playerList.get(0).movePlayer(5); //rolls a 5
         controller.playerList.get(0).movePlayer(6); //rolls a 6
-        assertTrue(controller.gameOver(9)); //checks if player has won
+        assertTrue(controller.gameOver()); //checks if player has won
     }
 
     @Test

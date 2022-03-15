@@ -15,7 +15,7 @@ public final class GameBoard {
     /**
      * Integer to define the width of the board.
      */
-    private final int boardWidth;
+    private static int boardWidth;
 
     /**
      * ArrayList for holding the entry wormhole objects.
@@ -41,7 +41,7 @@ public final class GameBoard {
      */
     public ArrayList<Integer> getAvailablePositions() {
         ArrayList<Integer> availablePositions = new ArrayList<Integer>();
-        for (int i = 2; i < (boardWidth * boardWidth) - 1; i++) {
+        for (int i = 2; i < (boardWidth * boardWidth); i++) {
             availablePositions.add(i);
         }
         return availablePositions;
@@ -64,7 +64,7 @@ public final class GameBoard {
     /**
      * @return the size of the board (no. of squares)
      */
-    public int getBoardSize() {
+    public static int getBoardSize() {
         return boardWidth * boardWidth;
     }
 
