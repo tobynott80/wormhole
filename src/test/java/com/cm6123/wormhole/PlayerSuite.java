@@ -80,4 +80,13 @@ public class PlayerSuite {
         controller.playerList.get(0).movePlayer(2);
         assertTrue(controller.checkWormholes());
     }
+
+    @Test
+    public void shouldBeAbleToNamePlayer(){
+        GameBoard gb = new GameBoard(5);
+        PlayerController controller = new PlayerController(2);
+        controller.initialisePlayers(1);
+        controller.namePlayer(0,"Toby");
+        assertEquals("Toby", controller.getName(0));
+    }
 }

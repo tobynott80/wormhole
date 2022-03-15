@@ -1,6 +1,7 @@
 package com.cm6123.wormhole.app;
 
 import com.cm6123.wormhole.board.GameBoard;
+import com.cm6123.wormhole.player.PlayerController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.Scanner;
@@ -50,6 +51,24 @@ public final class Application {
                     + "\nThere are wormhole entrances at " + gb.getEntryHoles()
                     + "\nand wormhole exits at " + gb.getExitHoles());
 
+            int noOfPlayers;
+            do {
+                System.out.println("Please enter the number of players? (integer between 2-6)");
+                while (!sc.hasNextInt()) { //ensuring a valid number is entered.
+                    System.out.println("Please enter a number between 2 and 6");
+                    sc.next();
+                }
+                noOfPlayers = sc.nextInt();
+            } while (noOfPlayers < 2 || noOfPlayers > 6); //ensure that the entered number of players is within the valid range.
+
+            PlayerController controller = new PlayerController(noOfPlayers);
+            for (int i = 0; i < noOfPlayers; i++) {
+                System.out.println("Please enter the name of player " + i + "?");
+                Scanner inputObj = new Scanner(System.in);
+                String usrIput;
+                usrIput = inputObj.nextLine();
+                controller.namePlayer(i, usrIput);
+            }
 
             String usrIput = "";
             boolean validInput = false;

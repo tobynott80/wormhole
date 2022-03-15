@@ -15,6 +15,11 @@ public class Player {
     private int position;
 
     /**
+     * Name of the player.
+     */
+    private String name = "UnNamed";
+
+    /**
      * Constructor for mostly testing purposes to define the players initial starting position.
      *
      * @param startingPosition Location for where player starts. Default is 1
@@ -54,5 +59,20 @@ public class Player {
         }
 
 
+    }
+
+    /**
+     * Method to assign an individual players name.
+     * @param playerName Name of player
+     */
+    public void assignName(final String playerName) {
+        this.name = playerName;
+    }
+
+    /**
+     * @return Returns the name of player
+     */
+    public String getName() {
+        return name;
     }
 }

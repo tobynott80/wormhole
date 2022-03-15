@@ -72,4 +72,21 @@ public final class PlayerController {
         }
         return false;
     }
+
+    /**
+     * Assign name to player method.
+     * @param playerNo Player number of playerlist
+     * @param name String name of player
+     */
+    public void namePlayer(final int playerNo, final String name) {
+        this.playerList.get(playerNo).assignName(name);
+    }
+
+    /**
+     * @param playerNo The player number
+     * @return Returns string the name of player
+     */
+    public String getName(final int playerNo) {
+        return this.playerList.get(playerNo).getName();
+    }
 }
