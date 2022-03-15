@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.stream.IntStream;
 
+
 /**
  * Class to manage the actions and methods of the gameboard.
  */
+@SuppressWarnings("unchecked")
 public final class GameBoard {
 
     /**
@@ -32,12 +34,20 @@ public final class GameBoard {
         this.boardWidth = width;
     }
 
+    /**
+     * @return Returns int arraylist of available positions for placing wormholes
+     */
     public ArrayList<Integer> getAvailablePositions() {
-        ArrayList<Integer> availablePositions = (ArrayList<Integer>) IntStream.range(2, (boardWidth * boardWidth) -1);
+        ArrayList<Integer> availablePositions = (ArrayList<Integer>) IntStream.range(2, (boardWidth * boardWidth) - 1);
         Collections.shuffle(availablePositions);
         return availablePositions;
     }
 
+    /**
+     * Void function to initialise wormhole lists.
+     * Creates the correct no. of entry and exit wormholes at available postions.
+     * Only to be run on boards of width 5-10
+     */
     public void initialiseWormholes() {
         ArrayList<Integer> availablePositions = getAvailablePositions();
         for (int i = 1; i < boardWidth; i++) {
@@ -55,7 +65,7 @@ public final class GameBoard {
 
 
     /**
-     * Testing method to create a new wormhole
+     * Testing method to create a new wormhole.
      * @param entry Postion of the entry wormhole
      * @param polarity Type of entry wormhole (positive/negative)
      * @param exit Postion of the exit wormhole
@@ -64,5 +74,16 @@ public final class GameBoard {
         entryWormholeList.add(new WormholeEntry(polarity, entry));
         exitWormholeList.add(new WormholeExit(exit));
         System.out.println("Entry wormhole(s) at " + entryWormholeList + ". Exit wormholes at " + exitWormholeList);
+    }
+
+    /**
+     * @return Returns user-friendly print of current entry wormholes with polarities
+     */
+    public String getEntryHoles() {
+        String returner = "";
+        for (WormholeEntry wormhole: entryWormholeList) {
+            returner = returner + wormhole.getPosition() + "(" + wormhole.getPolarity() + ")";
+        }
+        return returner;
     }
 }

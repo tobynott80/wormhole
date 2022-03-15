@@ -1,18 +1,25 @@
 package com.cm6123.wormhole.board;
 
-import java.util.Collections;
-
-import static com.cm6123.wormhole.board.GameBoard.exitWormholeList;
 
 public class Wormhole {
+    /**
+     * Location of individual wormhole object.
+     */
     protected final int position;
 
-    public Wormhole(final int position) {
-        this.position =  position;
+    /**
+     * Constructor of wormhole object.
+     * @param pos Position of wormhole
+     */
+    public Wormhole(final int pos) {
+        this.position =  pos;
     }
 
 
-    public Integer getPosition(){
+    /**
+     * @return Returns postion of the wormhole
+     */
+    public Integer getPosition() {
         return position;
     }
 
