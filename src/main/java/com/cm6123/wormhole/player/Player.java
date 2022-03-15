@@ -1,9 +1,8 @@
 package com.cm6123.wormhole.player;
 
 import com.cm6123.wormhole.board.GameBoard;
-import com.cm6123.wormhole.board.Wormhole;
 import com.cm6123.wormhole.board.WormholeEntry;
-import com.cm6123.wormhole.board.WormholeType;
+
 
 /**
  * Class to manage an individual player and their actions.
@@ -40,6 +39,7 @@ public class Player {
 
     /**
      * Main function to move the player after rolling dice.
+     *
      * @param squareDistance How many squares should player be moved
      */
     public void movePlayer(final int squareDistance) {

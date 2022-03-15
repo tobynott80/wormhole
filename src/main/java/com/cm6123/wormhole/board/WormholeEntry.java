@@ -4,16 +4,32 @@ import java.util.Collections;
 
 import static com.cm6123.wormhole.board.GameBoard.exitWormholeList;
 
+/**
+ * Subclass for an entry wormhole.
+ */
 public final class WormholeEntry extends Wormhole {
+    /**
+     * Polarity of entry - either positive or negative.
+     */
     private final WormholeType polarity;
+    /**
+     * Postion of wormhole.
+     */
     private final Integer position;
 
-    public WormholeEntry(final WormholeType polarity, final Integer position) {
-        super(position);
-        this.polarity = polarity;
-        this.position = position;
+    /**
+     * @param polar Polarity - either positive or negative.
+     * @param pos Postion of wormhole on board.
+     */
+    public WormholeEntry(final WormholeType polar, final Integer pos) {
+        super(pos);
+        this.polarity = polar;
+        this.position = pos;
     }
 
+    /**
+     * @return Returns the polarity of entry wormhole.
+     */
     public WormholeType getPolarity() {
         return polarity;
     }
@@ -25,15 +41,15 @@ public final class WormholeEntry extends Wormhole {
      */
     public int getExit() {
         Collections.shuffle(exitWormholeList);
-        if (this.polarity == WormholeType.positive){
+        if (this.polarity == WormholeType.positive) {
             for (WormholeExit exit : exitWormholeList) {
-                if (exit.getPosition() > position){
+                if (exit.getPosition() > position) {
                     return exit.getPosition();
                 }
             }
-        } else{
+        } else {
             for (WormholeExit exit : exitWormholeList) {
-                if (exit.getPosition() < position){
+                if (exit.getPosition() < position) {
                     return exit.getPosition();
                 }
             }

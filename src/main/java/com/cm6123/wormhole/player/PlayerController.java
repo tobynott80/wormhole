@@ -8,14 +8,14 @@ import java.util.ArrayList;
 /**
  * Class to combine players together and handle interactions across all players.
  */
-public class PlayerController{
+public final class PlayerController {
     /**
      * Number of players requested by the user(s).
      */
     private final int noOfPlayers;
 
     /**
-     * Array list to hold each player objects
+     * Array list to hold each player objects.
      */
     public ArrayList<Player> playerList = new ArrayList<Player>();
 
@@ -29,7 +29,7 @@ public class PlayerController{
     }
 
     /**
-     * @param startingPosition Starting board position. For testing use only, default value 1
+     * @param startingPosition Starting board position. For testing use only, default value 1.
      */
     public void initialisePlayers(final int startingPosition) {
 
@@ -41,7 +41,7 @@ public class PlayerController{
     }
 
     /**
-     * Method to check if game is over
+     * Method to check if game is over.
      * @param noOfSquares number of squares on gameboard
      * @return Boolean returned to determine if game is over or not
      */
@@ -56,6 +56,10 @@ public class PlayerController{
         return false;
     }
 
+    /**
+     * Checks if a player has landed on a wormhole.
+     * @return True if on wormhole, false if not.
+     */
     public boolean checkWormholes() {
         for (Player player: playerList) {
             for (Wormhole wormhole: GameBoard.entryWormholeList){
