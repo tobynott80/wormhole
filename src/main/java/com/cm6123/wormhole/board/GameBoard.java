@@ -32,14 +32,18 @@ public final class GameBoard {
      */
     public GameBoard(final int width) {
         this.boardWidth = width;
+        this.entryWormholeList = new ArrayList<WormholeEntry>();
+        this.exitWormholeList = new ArrayList<WormholeExit>();
     }
 
     /**
      * @return Returns int arraylist of available positions for placing wormholes
      */
     public ArrayList<Integer> getAvailablePositions() {
-        ArrayList<Integer> availablePositions = (ArrayList<Integer>) IntStream.range(2, (boardWidth * boardWidth) - 1);
-        Collections.shuffle(availablePositions);
+        ArrayList<Integer> availablePositions = new ArrayList<Integer>();
+        for (int i = 2; i < (boardWidth * boardWidth) - 1; i++) {
+            availablePositions.add(i);
+        }
         return availablePositions;
     }
 
@@ -50,6 +54,7 @@ public final class GameBoard {
      */
     public void initialiseWormholes() {
         ArrayList<Integer> availablePositions = getAvailablePositions();
+        Collections.shuffle(availablePositions);
         for (int i = 1; i < boardWidth; i++) {
             entryWormholeList.add(new WormholeEntry(WormholeType.getRandomPolarity(), availablePositions.remove(0)));
             exitWormholeList.add(new WormholeExit(availablePositions.remove(0)));
@@ -82,7 +87,18 @@ public final class GameBoard {
     public String getEntryHoles() {
         String returner = "";
         for (WormholeEntry wormhole: entryWormholeList) {
-            returner = returner + wormhole.getPosition() + "(" + wormhole.getPolarity() + ")";
+            returner = returner + wormhole.getPosition() + " (" + wormhole.getPolarity() + "), ";
+        }
+        return returner;
+    }
+
+    /**
+     * @return Returns user-friendly print of current exit wormholes
+     */
+    public String getExitHoles() {
+        String returner = "";
+        for (WormholeExit wormhole: exitWormholeList) {
+            returner = returner + wormhole.getPosition() + ", ";
         }
         return returner;
     }
