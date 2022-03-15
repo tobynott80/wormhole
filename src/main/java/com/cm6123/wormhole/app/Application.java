@@ -62,8 +62,9 @@ public final class Application {
             } while (noOfPlayers < 2 || noOfPlayers > 6); //ensure that the entered number of players is within the valid range.
 
             PlayerController controller = new PlayerController(noOfPlayers);
+            controller.initialisePlayers(1);
             for (int i = 0; i < noOfPlayers; i++) {
-                System.out.println("Please enter the name of player " + i + "?");
+                System.out.println("Please enter the name of player " + i+1 + "?");
                 Scanner inputObj = new Scanner(System.in);
                 String usrIput;
                 usrIput = inputObj.nextLine();
