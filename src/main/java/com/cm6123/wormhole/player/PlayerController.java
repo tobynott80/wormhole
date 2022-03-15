@@ -1,5 +1,6 @@
 package com.cm6123.wormhole.player;
 
+import com.cm6123.wormhole.app.Application;
 import com.cm6123.wormhole.board.GameBoard;
 import com.cm6123.wormhole.board.Wormhole;
 
@@ -26,6 +27,7 @@ public final class PlayerController {
     public PlayerController(final int players) {
         this.noOfPlayers = players;
         this.playerList = new ArrayList<Player>();
+
     }
 
     /**

@@ -2,6 +2,7 @@ package com.cm6123.wormhole.app;
 
 import com.cm6123.wormhole.board.GameBoard;
 import com.cm6123.wormhole.player.PlayerController;
+import org.apache.logging.slf4j.Log4jLogger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.Scanner;
@@ -10,7 +11,8 @@ public final class Application {
     /**
      * Create a logger for the class.
      */
-    private static Logger logger = LoggerFactory.getLogger(Application.class);
+    private static final Logger logger = LoggerFactory.getLogger(Application.class);
+
 
 
     private Application() {
@@ -39,6 +41,7 @@ public final class Application {
             do {
                 System.out.println("Please enter the width dimension of your board? (integer between 5-10)");
                 while (!sc.hasNextInt()) { //ensuring a valid number is entered.
+                    logger.info("Non-int entered, trying again");
                     System.out.println("Please enter a number between 5 and 10");
                     sc.next();
                 }
@@ -46,7 +49,9 @@ public final class Application {
             } while (boardWidth < 5 || boardWidth > 10); //ensure that the entered width is within the valid range.
             logger.info("Creating a gameboard with width " + boardWidth + " and of size " + boardWidth * boardWidth);
             GameBoard gb = new GameBoard(boardWidth);
+            logger.info("Created new gameboard");
             gb.initialiseWormholes();
+            logger.info("Initialised wormholes");
             System.out.println("Thank you. The board has " + boardWidth * boardWidth + " squares. "
                     + "\nThere are wormhole entrances at " + gb.getEntryHoles()
                     + "\nand wormhole exits at " + gb.getExitHoles());
@@ -69,7 +74,12 @@ public final class Application {
                 String usrIput;
                 usrIput = inputObj.nextLine();
                 controller.namePlayer(i, usrIput);
+                logger.info("Named player " + i +1 + usrIput);
             }
+
+
+
+
 
             String usrIput = "";
             boolean validInput = false;
@@ -79,9 +89,11 @@ public final class Application {
                 usrIput = inputObj.nextLine();
                 if (usrIput.toUpperCase().equals("Y")) {
                     validInput = true;
+                    logger.info("User wished to play again.");
                 } else if (usrIput.toUpperCase().equals("N")) {
                     validInput = true;
                     playAgain = false;
+                    logger.info("Player wishes to end application");
                 }
             }
 
