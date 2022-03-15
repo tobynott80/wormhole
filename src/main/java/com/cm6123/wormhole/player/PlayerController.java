@@ -24,8 +24,8 @@ public final class PlayerController {
      * @param players number of players specified
      */
     public PlayerController(final int players) {
-        noOfPlayers = players;
-
+        this.noOfPlayers = players;
+        this.playerList = new ArrayList<Player>();
     }
 
     /**
@@ -42,7 +42,6 @@ public final class PlayerController {
 
     /**
      * Method to check if game is over.
-     * @param noOfSquares number of squares on gameboard
      * @return Boolean returned to determine if game is over or not
      */
     public boolean gameOver() {

@@ -1,6 +1,7 @@
 package com.cm6123.wormhole;
 
 import com.cm6123.wormhole.board.GameBoard;
+import com.cm6123.wormhole.board.WormholeType;
 import com.cm6123.wormhole.player.Player;
 import com.cm6123.wormhole.player.PlayerController;
 import org.apache.logging.log4j.core.util.Assert;
@@ -74,5 +75,9 @@ public class PlayerSuite {
         GameBoard gb = new GameBoard(5);
         PlayerController controller = new PlayerController(2);
         controller.initialisePlayers(1);
+        gb.addWormhole(3, WormholeType.positive,3); //exit must be on 3 otherwise player will no longer be on a wormhole
+        assertFalse(controller.checkWormholes());
+        controller.playerList.get(0).movePlayer(2);
+        assertTrue(controller.checkWormholes());
     }
 }

@@ -1,7 +1,6 @@
 package com.cm6123.wormhole.app;
 
 import com.cm6123.wormhole.board.GameBoard;
-import com.cm6123.wormhole.board.Wormhole;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.Scanner;
@@ -47,9 +46,9 @@ public final class Application {
             logger.info("Creating a gameboard with width " + boardWidth + " and of size " + boardWidth * boardWidth);
             GameBoard gb = new GameBoard(boardWidth);
             gb.initialiseWormholes();
-            System.out.println("Thank you. The board has " + boardWidth * boardWidth + " squares. " +
-                    "\nThere are wormhole entrances at " + gb.getEntryHoles() +
-                    "\nand wormhole exits at " + gb.getExitHoles());
+            System.out.println("Thank you. The board has " + boardWidth * boardWidth + " squares. "
+                    + "\nThere are wormhole entrances at " + gb.getEntryHoles()
+                    + "\nand wormhole exits at " + gb.getExitHoles());
 
 
             String usrIput = "";

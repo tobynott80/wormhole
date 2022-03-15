@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
+import static com.cm6123.wormhole.board.GameBoard.entryWormholeList;
+import static com.cm6123.wormhole.board.GameBoard.exitWormholeList;
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -30,6 +32,18 @@ public class WormholeChecks {
         assertEquals(2, generated.get(0)); //cannot have wormholes on first square, so first available wormhole should be on square 2
         assertEquals(99, generated.get(generated.size()-1)); //cannot have wormholes on last square, so last available wormhole should be on square 99
         assertEquals(15, generated.get(13)); //checking that 13th item in list is correct
+    }
+
+    @Test
+    public void shouldBeAbleToFindNearestExit(){
+        GameBoard gbd = new GameBoard(5);
+        gbd.addWormhole(5, WormholeType.positive,8);
+        assertEquals(8, entryWormholeList.get(0).getExit());
+        gbd.addWormhole(22, WormholeType.negative,8);
+        assertEquals(8, entryWormholeList.get(1).getExit());
+        gbd.addWormhole(22, WormholeType.positive,8);
+        assertEquals(22, entryWormholeList.get(2).getExit());
+
     }
 
     @Test
