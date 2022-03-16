@@ -11,9 +11,10 @@ stages:
   - assemble
   - build
   - publish
-  - deploy
   - test
   - visualize
+  - deploy
+
 
 before_script:
   - echo $GRADLE_HOME
