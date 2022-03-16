@@ -1,7 +1,6 @@
 package com.cm6123.wormhole.app;
 
 import com.cm6123.wormhole.board.GameBoard;
-import com.cm6123.wormhole.board.Wormhole;
 import com.cm6123.wormhole.board.WormholeEntry;
 import com.cm6123.wormhole.board.WormholeType;
 import com.cm6123.wormhole.dice.Dice;
@@ -10,7 +9,6 @@ import com.cm6123.wormhole.player.PlayerController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.sound.sampled.FloatControl;
 import java.util.Scanner;
 
 public final class Application {
@@ -106,14 +104,14 @@ public final class Application {
                 System.out.println(controller.getName(currentPlayer) + "'s (Player " + (currentPlayer+1) + " - It's Your Turn");
                 System.out.println("You are currently on square " + controller.getPostion(currentPlayer));
                 int newLocation;
+                int squareDistance;
                 Integer roll1;
                 Integer roll2;
                 if (controller.getDice(currentPlayer) == DiceMode.automatic){ //If the user has selected automatic dice rolling
                     Dice aDice = new Dice(6);
                     roll1 = aDice.roll();
-                    roll1 = aDice.roll();
+                    roll2 = aDice.roll();
                     System.out.println(controller.getName(currentPlayer) + " rolls a " + roll1 + "and a " + roll2);
-                    newLocation = controller.getPostion(currentPlayer) + roll1 + roll2;
                 } else { //If user is rolling their own dice.
                     do {
                         System.out.println("Please enter the result of your first dice roll (integer between 1-6)");
@@ -133,15 +131,22 @@ public final class Application {
                         }
                         roll2 = sc.nextInt();
                     } while (roll2 < 1 || roll2 > 6); //ensure that the entered dice roll is within the valid range.
-                    newLocation = controller.getPostion(currentPlayer) + roll1 + roll2;
                 }
+                newLocation = controller.getPostion(currentPlayer) + roll1 + roll2;
+                squareDistance = roll1 + roll2;
 
                 if (controller.checkWormholes(newLocation)) { //if the player is going to land on a wormhole
                     WormholeEntry currentWormhole = gb.getEntryHole(newLocation);
                     System.out.println(controller.getName(currentPlayer) + " moves to square " + newLocation + " which is a " + currentWormhole.getPolarity() + " wormhole...");
                     if(currentWormhole.getPolarity().equals(WormholeType.negative) && roll1.equals(roll2)){
-
+                        System.out.println("You have landed on a negative wormhole, but not to worry, you also rolled a double, so you stay where you are");
+                    } else {
+                        controller.movePlayer(currentPlayer, squareDistance);
+                        System.out.println(controller.getName(currentPlayer) + " has moved to exit wormhole " + controller.getPostion(currentPlayer));
                     }
+                } else { //if the player does not land on a wormhole
+                    controller.movePlayer(currentPlayer, squareDistance);
+                    System.out.println(controller.getName(currentPlayer) + " has moved to square " + controller.getPostion(currentPlayer));
                 }
 
 

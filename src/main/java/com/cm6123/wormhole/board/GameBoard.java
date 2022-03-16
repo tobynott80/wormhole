@@ -17,6 +17,20 @@ public final class GameBoard {
     private static int boardWidth;
 
     /**
+     * @return Returns the entry wormhole list
+     */
+    public static ArrayList<WormholeEntry> getEntryWormholeList() {
+        return entryWormholeList;
+    }
+
+    /**
+     * @return Returns the exit wormhole list.
+     */
+    public static ArrayList<WormholeExit> getExitWormholeList() {
+        return exitWormholeList;
+    }
+
+    /**
      * ArrayList for holding the entry wormhole objects.
      */
     public static ArrayList<WormholeEntry> entryWormholeList = new ArrayList<WormholeEntry>();
@@ -54,7 +68,7 @@ public final class GameBoard {
     public void initialiseWormholes() {
         ArrayList<Integer> availablePositions = getAvailablePositions();
         Collections.shuffle(availablePositions);
-        for (int i = 1; i < boardWidth; i++) {
+        for (int i = 1; i < boardWidth + 1; i++) {
             entryWormholeList.add(new WormholeEntry(WormholeType.getRandomPolarity(), availablePositions.remove(0)));
             exitWormholeList.add(new WormholeExit(availablePositions.remove(0)));
         }
@@ -102,7 +116,12 @@ public final class GameBoard {
         return returner;
     }
 
-    public WormholeEntry getEntryHole(int postion) {
+    /**
+     * Method to return requested wormhole object based off postion.
+     * @param postion Position of entry hole
+     * @return wormholeEntry object
+     */
+    public WormholeEntry getEntryHole(final int postion) {
         for (WormholeEntry wormhole: GameBoard.entryWormholeList){
             if (postion == wormhole.getPosition()){
                 return wormhole;

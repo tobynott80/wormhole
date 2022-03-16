@@ -14,6 +14,15 @@ import static org.junit.jupiter.api.Assertions.*;
 public class WormholeChecks {
 
     @Test
+    public void shouldBeAbleToInitialiseWormholes(){
+        GameBoard gbd = new GameBoard(5);
+        gbd.initialiseWormholes();
+        assertEquals(5, gbd.getEntryWormholeList().size());  //ensure 5 entry wormholes have been created
+        assertEquals(5, gbd.getExitWormholeList().size()); //ensure 5 exit wormholes have been created
+
+    }
+
+    @Test
     public void shouldBeAbleToReturnAvailablePostitions(){
         GameBoard gbd = new GameBoard(5);
         ArrayList<Integer> generated = gbd.getAvailablePositions();

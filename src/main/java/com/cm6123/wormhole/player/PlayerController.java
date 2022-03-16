@@ -61,8 +61,9 @@ public final class PlayerController {
     }
 
     /**
-     * Checks if a player has landed on a wormhole.
-     * @return True if on wormhole, false if not.
+     * Checks if a square is a wormhole.
+     * @param testLocation Location of square to be tested.
+     * @return True if a wormhole, false if not.
      */
     public boolean checkWormholes(final int testLocation) {
         for (Player player: playerList) {
@@ -110,6 +111,9 @@ public final class PlayerController {
         return this.playerList.get(playerNo).getDiceMode();
     }
 
+    /**
+     * @return Returns the current player.
+     */
     public int getCurrentPlayer(){
         return this.currentPlayer;
     }
@@ -127,7 +131,19 @@ public final class PlayerController {
         return this.currentPlayer;
     }
 
-    public int getPostion(int playerNo) {
+    /**
+     * @param playerNo Player number in playerlist.
+     * @return Returns the position of given player.
+     */
+    public int getPostion(final int playerNo) {
         return this.playerList.get(playerNo).getPosition();
+    }
+
+    /**
+     * @param playerNo Player number in playerlist.
+     * @param squareDistance Distance the player is to be moved.
+     */
+    public void movePlayer(final int playerNo, final int squareDistance) {
+        playerList.get(playerNo).movePlayer(squareDistance);
     }
 }
