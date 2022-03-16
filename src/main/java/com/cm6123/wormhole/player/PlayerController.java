@@ -1,6 +1,5 @@
 package com.cm6123.wormhole.player;
 
-import com.cm6123.wormhole.app.Application;
 import com.cm6123.wormhole.board.GameBoard;
 import com.cm6123.wormhole.board.Wormhole;
 import com.cm6123.wormhole.dice.DiceMode;
@@ -20,6 +19,10 @@ public final class PlayerController {
      * Array list to hold each player objects.
      */
     public ArrayList<Player> playerList = new ArrayList<Player>();
+    /**
+     * Which player number is the current player.
+     */
+    private Integer currentPlayer = 0;
 
     /**
      * Constructor to supply number of player.
@@ -28,7 +31,7 @@ public final class PlayerController {
     public PlayerController(final int players) {
         this.noOfPlayers = players;
         this.playerList = new ArrayList<Player>();
-
+        this.currentPlayer = 0;
     }
 
     /**
@@ -52,8 +55,6 @@ public final class PlayerController {
         for (Player player : playerList) {
             if (player.getPosition() >= noOfSquares){
                 return true;
-            }else{
-                return false;
             }
         }
         return false;
@@ -63,10 +64,10 @@ public final class PlayerController {
      * Checks if a player has landed on a wormhole.
      * @return True if on wormhole, false if not.
      */
-    public boolean checkWormholes() {
+    public boolean checkWormholes(final int testLocation) {
         for (Player player: playerList) {
             for (Wormhole wormhole: GameBoard.entryWormholeList){
-                if (player.getPosition() == wormhole.getPosition()){
+                if (testLocation == wormhole.getPosition()){
                     //player has landed on a wormhole
                     return true;
                 }
@@ -93,6 +94,40 @@ public final class PlayerController {
         return this.playerList.get(playerNo).getName();
     }
 
-    public void diceMode(int playerNo, DiceMode diceType) {
+    /**
+     * @param playerNo Player Number
+     * @param diceType Type of dice roll chosen - auto/manual
+     */
+    public void diceMode(final int playerNo, final DiceMode diceType) {
+        this.playerList.get(playerNo).assignDiceMode(diceType);
+    }
+
+    /**
+     * @param playerNo Player Number
+     * @return Returns the chosen dice mode
+     */
+    public DiceMode getDice(final int playerNo) {
+        return this.playerList.get(playerNo).getDiceMode();
+    }
+
+    public int getCurrentPlayer(){
+        return this.currentPlayer;
+    }
+
+    /**
+     * Method to go to next player.
+     * @return Returns the new current player
+     */
+    public int nextPlayer() {
+        if (!this.currentPlayer.equals(this.noOfPlayers)){
+            this.currentPlayer++;
+        } else {
+            this.currentPlayer = 0;
+        }
+        return this.currentPlayer;
+    }
+
+    public int getPostion(int playerNo) {
+        return this.playerList.get(playerNo).getPosition();
     }
 }

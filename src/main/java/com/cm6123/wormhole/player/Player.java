@@ -2,6 +2,7 @@ package com.cm6123.wormhole.player;
 
 import com.cm6123.wormhole.board.GameBoard;
 import com.cm6123.wormhole.board.WormholeEntry;
+import com.cm6123.wormhole.dice.DiceMode;
 
 
 /**
@@ -18,6 +19,10 @@ public class Player {
      * Name of the player.
      */
     private String name = "UnNamed";
+    /**
+     * Selected dice mode of player - manual vs automatic.
+     */
+    private DiceMode diceMode;
 
     /**
      * Constructor for mostly testing purposes to define the players initial starting position.
@@ -70,9 +75,24 @@ public class Player {
     }
 
     /**
-     * @return Returns the name of player
+     * @return Returns the name of player.
      */
     public String getName() {
         return name;
+    }
+
+    /**
+     * Assign chosen dice roll mode.
+     * @param diceType Type of dice roll - automatic/manual.
+     */
+    public void assignDiceMode(final DiceMode diceType) {
+        this.diceMode = diceType;
+    }
+
+    /**
+     * @return Returns the chosen mode of rolling dice.
+     */
+    public DiceMode getDiceMode() {
+        return this.diceMode;
     }
 }

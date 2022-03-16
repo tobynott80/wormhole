@@ -1,18 +1,23 @@
 package com.cm6123.wormhole.app;
 
 import com.cm6123.wormhole.board.GameBoard;
+import com.cm6123.wormhole.board.Wormhole;
+import com.cm6123.wormhole.board.WormholeEntry;
+import com.cm6123.wormhole.board.WormholeType;
+import com.cm6123.wormhole.dice.Dice;
 import com.cm6123.wormhole.dice.DiceMode;
 import com.cm6123.wormhole.player.PlayerController;
-import org.apache.logging.slf4j.Log4jLogger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.sound.sampled.FloatControl;
 import java.util.Scanner;
 
 public final class Application {
     /**
      * Create a logger for the class.
      */
-    private static final Logger logger = LoggerFactory.getLogger(Application.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Application.class);
 
 
 
@@ -28,7 +33,7 @@ public final class Application {
     public static void main(final String[] args) {
 
 
-        logger.info("Application Started with args:{}", String.join(",", args));
+        LOGGER.info("Application Started with args:{}", String.join(",", args));
 
         System.out.println("Hello World.  Welcome to Wormhole.");
         boolean playAgain = true;
@@ -42,17 +47,17 @@ public final class Application {
             do {
                 System.out.println("Please enter the width dimension of your board? (integer between 5-10)");
                 while (!sc.hasNextInt()) { //ensuring a valid number is entered.
-                    logger.info("Non-int entered, trying again");
+                    LOGGER.info("Non-int entered, trying again");
                     System.out.println("Please enter a number between 5 and 10");
                     sc.next();
                 }
                 boardWidth = sc.nextInt();
             } while (boardWidth < 5 || boardWidth > 10); //ensure that the entered width is within the valid range.
-            logger.info("Creating a gameboard with width " + boardWidth + " and of size " + boardWidth * boardWidth);
+            LOGGER.info("Creating a gameboard with width " + boardWidth + " and of size " + boardWidth * boardWidth);
             GameBoard gb = new GameBoard(boardWidth);
-            logger.info("Created new gameboard");
+            LOGGER.info("Created new gameboard");
             gb.initialiseWormholes();
-            logger.info("Initialised wormholes");
+            LOGGER.info("Initialised wormholes");
             System.out.println("Thank you. The board has " + boardWidth * boardWidth + " squares. "
                     + "\nThere are wormhole entrances at " + gb.getEntryHoles()
                     + "\nand wormhole exits at " + gb.getExitHoles());
@@ -70,18 +75,18 @@ public final class Application {
             PlayerController controller = new PlayerController(noOfPlayers);
             controller.initialisePlayers(1);
             for (int i = 0; i < noOfPlayers; i++) {
-                System.out.println("Please enter the name of player " + i+1 + "?");
+                System.out.println("Please enter the name of player " + (i+1) + "?");
                 Scanner inputObj = new Scanner(System.in);
                 String usrIput;
                 usrIput = inputObj.nextLine();
                 controller.namePlayer(i, usrIput);
-                logger.info("Named player " + i +1 + usrIput);
+                LOGGER.info("Named player " + (i+1) + ": " + usrIput);
             }
 
             for (int i = 0; i < noOfPlayers; i++) {
                 boolean validInput = false;
                 while (!validInput) {
-                    System.out.println(" - do you want to roll the dice, or shall I do it for you? Type “Y” to roll yourself or “N” to let me do it.");
+                    System.out.println(controller.playerList.get(i).getName() + " - do you want to roll the dice, or shall I do it for you? Type 'Y' to roll yourself or 'N' to let me do it.");
                     Scanner inputObj = new Scanner(System.in);
                     String usrIput;
                     usrIput = inputObj.nextLine();
@@ -96,6 +101,53 @@ public final class Application {
                 }
             }
 
+            while(!controller.gameOver()){
+                int currentPlayer = controller.getCurrentPlayer();
+                System.out.println(controller.getName(currentPlayer) + "'s (Player " + (currentPlayer+1) + " - It's Your Turn");
+                System.out.println("You are currently on square " + controller.getPostion(currentPlayer));
+                int newLocation;
+                Integer roll1;
+                Integer roll2;
+                if (controller.getDice(currentPlayer) == DiceMode.automatic){ //If the user has selected automatic dice rolling
+                    Dice aDice = new Dice(6);
+                    roll1 = aDice.roll();
+                    roll1 = aDice.roll();
+                    System.out.println(controller.getName(currentPlayer) + " rolls a " + roll1 + "and a " + roll2);
+                    newLocation = controller.getPostion(currentPlayer) + roll1 + roll2;
+                } else { //If user is rolling their own dice.
+                    do {
+                        System.out.println("Please enter the result of your first dice roll (integer between 1-6)");
+                        while (!sc.hasNextInt()) { //ensuring a valid number is entered.
+                            LOGGER.info("Non-int entered, trying again");
+                            System.out.println("Invalid Entry - Please enter a number between 1 and 6");
+                            sc.next();
+                        }
+                        roll1 = sc.nextInt();
+                    } while (roll1 < 1 || roll1 > 6); //ensure that the entered dice roll is within the valid range.
+                    do {
+                        System.out.println("Please enter the result of your second dice roll (integer between 1-6)");
+                        while (!sc.hasNextInt()) { //ensuring a valid number is entered.
+                            LOGGER.info("Non-int entered, trying again");
+                            System.out.println("Invalid Entry - Please enter a number between 1 and 6");
+                            sc.next();
+                        }
+                        roll2 = sc.nextInt();
+                    } while (roll2 < 1 || roll2 > 6); //ensure that the entered dice roll is within the valid range.
+                    newLocation = controller.getPostion(currentPlayer) + roll1 + roll2;
+                }
+
+                if (controller.checkWormholes(newLocation)) { //if the player is going to land on a wormhole
+                    WormholeEntry currentWormhole = gb.getEntryHole(newLocation);
+                    System.out.println(controller.getName(currentPlayer) + " moves to square " + newLocation + " which is a " + currentWormhole.getPolarity() + " wormhole...");
+                    if(currentWormhole.getPolarity().equals(WormholeType.negative) && roll1.equals(roll2)){
+
+                    }
+                }
+
+
+                controller.nextPlayer();
+            }
+
 
 
             String usrIput = "";
@@ -106,18 +158,18 @@ public final class Application {
                 usrIput = inputObj.nextLine();
                 if (usrIput.toUpperCase().equals("Y")) {
                     validInput = true;
-                    logger.info("User wished to play again.");
+                    LOGGER.info("User wished to play again.");
                 } else if (usrIput.toUpperCase().equals("N")) {
                     validInput = true;
                     playAgain = false;
-                    logger.info("Player wishes to end application");
+                    LOGGER.info("Player wishes to end application");
                 }
             }
 
         }
 
 
-        logger.info("Application closing");
+        LOGGER.info("Application closing");
     }
 
 

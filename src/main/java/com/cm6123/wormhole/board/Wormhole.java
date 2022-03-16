@@ -5,7 +5,7 @@ public class Wormhole {
     /**
      * Location of individual wormhole object.
      */
-    protected final int position;
+    private final int position;
 
     /**
      * Constructor of wormhole object.

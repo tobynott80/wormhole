@@ -101,4 +101,13 @@ public final class GameBoard {
         }
         return returner;
     }
+
+    public WormholeEntry getEntryHole(int postion) {
+        for (WormholeEntry wormhole: GameBoard.entryWormholeList){
+            if (postion == wormhole.getPosition()){
+                return wormhole;
+            }
+        }
+        return null;
+    }
 }
