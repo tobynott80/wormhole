@@ -13,7 +13,7 @@ stages:
   - publish
   - deploy
   - test
-  - coverage
+  - visualize
 
 before_script:
   - echo $GRADLE_HOME
