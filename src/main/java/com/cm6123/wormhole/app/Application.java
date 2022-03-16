@@ -1,6 +1,7 @@
 package com.cm6123.wormhole.app;
 
 import com.cm6123.wormhole.board.GameBoard;
+import com.cm6123.wormhole.dice.DiceMode;
 import com.cm6123.wormhole.player.PlayerController;
 import org.apache.logging.slf4j.Log4jLogger;
 import org.slf4j.Logger;
@@ -77,7 +78,23 @@ public final class Application {
                 logger.info("Named player " + i +1 + usrIput);
             }
 
+            for (int i = 0; i < noOfPlayers; i++) {
+                boolean validInput = false;
+                while (!validInput) {
+                    System.out.println(" - do you want to roll the dice, or shall I do it for you? Type “Y” to roll yourself or “N” to let me do it.");
+                    Scanner inputObj = new Scanner(System.in);
+                    String usrIput;
+                    usrIput = inputObj.nextLine();
+                    if (usrIput.toUpperCase().equals("Y")) {
+                        validInput = true;
+                        controller.diceMode(i, DiceMode.manual);
+                    } else if (usrIput.toUpperCase().equals("N")) {
+                        controller.diceMode(i, DiceMode.automatic);
+                        validInput = true;
 
+                    }
+                }
+            }
 
 
 

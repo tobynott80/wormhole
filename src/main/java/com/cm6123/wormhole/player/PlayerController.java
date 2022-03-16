@@ -3,6 +3,7 @@ package com.cm6123.wormhole.player;
 import com.cm6123.wormhole.app.Application;
 import com.cm6123.wormhole.board.GameBoard;
 import com.cm6123.wormhole.board.Wormhole;
+import com.cm6123.wormhole.dice.DiceMode;
 
 import java.util.ArrayList;
 
@@ -90,5 +91,8 @@ public final class PlayerController {
      */
     public String getName(final int playerNo) {
         return this.playerList.get(playerNo).getName();
+    }
+
+    public void diceMode(int playerNo, DiceMode diceType) {
     }
 }
