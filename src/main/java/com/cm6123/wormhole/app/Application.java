@@ -152,7 +152,7 @@ public final class Application {
 
                 controller.nextPlayer();
             }
-
+            System.out.println("Cogratulations " + controller.getWinner().getName() + "! You won!");
 
 
             String usrIput = "";

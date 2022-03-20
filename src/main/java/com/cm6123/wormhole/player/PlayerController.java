@@ -123,7 +123,7 @@ public final class PlayerController {
      * @return Returns the new current player
      */
     public int nextPlayer() {
-        if (!this.currentPlayer.equals(this.noOfPlayers)){
+        if (!this.currentPlayer.equals(this.noOfPlayers - 1)){
             this.currentPlayer++;
         } else {
             this.currentPlayer = 0;
@@ -145,5 +145,20 @@ public final class PlayerController {
      */
     public void movePlayer(final int playerNo, final int squareDistance) {
         playerList.get(playerNo).movePlayer(squareDistance);
+    }
+
+    /**
+     * @return Returns the current winning player
+     */
+    public Player getWinner() {
+        int highestScore = 0;
+        Player winningPlayer = null;
+        for (Player player: this.playerList) {
+            if (player.getPosition() > highestScore){
+                highestScore = player.getPosition();
+                winningPlayer = player;
+            }
+        }
+        return winningPlayer;
     }
 }
