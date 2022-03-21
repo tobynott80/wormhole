@@ -16,9 +16,16 @@ public final class PlayerController {
     private final int noOfPlayers;
 
     /**
+     * @return Returns current playerlist
+     */
+    public ArrayList<Player> getPlayerList() {
+        return playerList;
+    }
+
+    /**
      * Array list to hold each player objects.
      */
-    public ArrayList<Player> playerList = new ArrayList<Player>();
+    private ArrayList<Player> playerList = new ArrayList<Player>();
     /**
      * Which player number is the current player.
      */
@@ -135,7 +142,7 @@ public final class PlayerController {
      * @param playerNo Player number in playerlist.
      * @return Returns the position of given player.
      */
-    public int getPostion(final int playerNo) {
+    public int getPosition(final int playerNo) {
         return this.playerList.get(playerNo).getPosition();
     }
 
@@ -161,4 +168,6 @@ public final class PlayerController {
         }
         return winningPlayer;
     }
+
+
 }

@@ -26,10 +26,10 @@ public class CoreScenariosTests {
         GameBoard gb = new GameBoard(4); //initialise new gameboard of width 4
         PlayerController controller = new PlayerController(2); //create new 2 player controller
         controller.initialisePlayers(1); //initialise players starting at 1
-        assertEquals(controller.playerList.get(0).getPosition(),1); //check that player 1 has been initialised and is at the correct position
-        controller.playerList.get(0).movePlayer(3); //rolls a 3
-        controller.playerList.get(0).movePlayer(4); //rolls a 4
-        assertEquals(controller.playerList.get(0).getPosition(),8); //check that player 1 actually lands on square 8
+        assertEquals(controller.getPosition(0),1); //check that player 1 has been initialised and is at the correct position
+        controller.movePlayer(0,3); //rolls a 3
+        controller.movePlayer(0,4); //rolls a 4
+        assertEquals(controller.getPosition(0),8); //check that player 1 actually lands on square 8
 
     }
 
@@ -50,8 +50,8 @@ public class CoreScenariosTests {
         GameBoard gb = new GameBoard(3); //initialise new gameboard of width 3
         PlayerController controller = new PlayerController(2); //create new 2 player controller
         controller.initialisePlayers(1); //initialise players starting at 1
-        controller.playerList.get(0).movePlayer(5); //rolls a 5
-        controller.playerList.get(0).movePlayer(6); //rolls a 6
+        controller.movePlayer(0, 5); //rolls a 5
+        controller.movePlayer(0, 6); //rolls a 6
         assertTrue(controller.gameOver()); //checks if player has won
     }
 
@@ -71,11 +71,11 @@ public class CoreScenariosTests {
         controller.initialisePlayers(1); //initialise players starting at 1
         Dice aDice = new Dice(6);   // create set of two dice
         Dice bDice = new Dice(6);   // create set of two dice
-        for (Player player: controller.playerList) {
+        for (Player player: controller.getPlayerList()) {
             player.movePlayer(aDice.roll());    //roll each dice
             player.movePlayer(bDice.roll());    //roll each dice
         }
-        for (Player player: controller.playerList) {
+        for (Player player: controller.getPlayerList()) {
             assertNotEquals(player.getPosition(),1); //assert that each player has succsessfully moved past square 1
         }
 
@@ -93,8 +93,8 @@ public class CoreScenariosTests {
         PlayerController controller = new PlayerController(2);
         controller.initialisePlayers(1);
         gb.addWormhole(7, WormholeType.positive, 20);
-        controller.playerList.get(0).movePlayer(4);
-        controller.playerList.get(0).movePlayer(2);
-        assertEquals(controller.playerList.get(0).getPosition(), 20); //check that player succsessfully moved to square 20 after landing on the wormhole
+        controller.movePlayer(0, 4);
+        controller.movePlayer(0, 2);
+        assertEquals(controller.getPosition(0), 20); //check that player succsessfully moved to square 20 after landing on the wormhole
     }
 }

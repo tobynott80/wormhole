@@ -2,10 +2,8 @@ package com.cm6123.wormhole;
 
 import com.cm6123.wormhole.board.GameBoard;
 import com.cm6123.wormhole.board.WormholeType;
-import com.cm6123.wormhole.dice.DiceMode;
 import com.cm6123.wormhole.player.Player;
 import com.cm6123.wormhole.player.PlayerController;
-import org.apache.logging.log4j.core.util.Assert;
 import org.junit.jupiter.api.Test;
 
 import static com.cm6123.wormhole.dice.DiceMode.automatic;
@@ -31,8 +29,8 @@ public class PlayerSuite {
     public void shouldCreate2PlayersWithStartingPosition1() {
         PlayerController controller = new PlayerController(2);
         controller.initialisePlayers(1);
-        assertEquals(controller.playerList.get(0).getPosition(), 1);
-        assertEquals(controller.playerList.get(1).getPosition(), 1);
+        assertEquals(controller.getPosition(0), 1);
+        assertEquals(controller.getPosition(1), 1);
 
     }
 
@@ -40,9 +38,9 @@ public class PlayerSuite {
     public void shouldMovePlayer1butNotPlayer2() {
         PlayerController controller = new PlayerController(2);
         controller.initialisePlayers(1);
-        controller.playerList.get(0).movePlayer(5); //move player 1 by 5 spaced, new position should be 6
-        assertEquals(controller.playerList.get(0).getPosition(), 6);
-        assertEquals(controller.playerList.get(1).getPosition(), 1);
+        controller.movePlayer(0,5); //move player 1 by 5 spaced, new position should be 6
+        assertEquals(controller.getPosition(0), 6);
+        assertEquals(controller.getPosition(1), 1);
 
     }
 
@@ -51,12 +49,20 @@ public class PlayerSuite {
         GameBoard gb = new GameBoard(5);
         PlayerController controller = new PlayerController(2);
         controller.initialisePlayers(1);
-        controller.playerList.get(0).movePlayer(25);
+        controller.movePlayer(0,24);  //moving player to the exact fininishing location 1+24=25
         assertTrue(controller.gameOver());
-        controller.playerList.get(0).movePlayer(26);
+
+        gb = new GameBoard(5);
+        controller = new PlayerController(2);
+        controller.initialisePlayers(1);
+        controller.movePlayer(0,999);
         assertTrue(controller.gameOver());
-        controller.playerList.get(0).movePlayer(9999);
-        assertTrue(controller.gameOver());
+
+        gb = new GameBoard(5);
+        controller = new PlayerController(2);
+        controller.initialisePlayers(1);
+        controller.movePlayer(0,23);
+        assertFalse(controller.gameOver());
     }
 
     @Test
@@ -65,11 +71,11 @@ public class PlayerSuite {
         PlayerController controller = new PlayerController(2);
         controller.initialisePlayers(1);
         assertFalse(controller.gameOver());
-        controller.playerList.get(0).movePlayer(1);
+        controller.movePlayer(0,1);
         assertFalse(controller.gameOver());
-        controller.playerList.get(1).movePlayer(5);
+        controller.movePlayer(1,5);
         assertFalse(controller.gameOver());
-        controller.playerList.get(0).movePlayer(-2);
+        controller.movePlayer(0,-2);
         assertFalse(controller.gameOver());
     }
 
