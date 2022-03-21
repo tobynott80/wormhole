@@ -4,6 +4,7 @@ import com.cm6123.wormhole.board.GameBoard;
 import com.cm6123.wormhole.board.WormholeType;
 import com.cm6123.wormhole.player.Player;
 import com.cm6123.wormhole.player.PlayerController;
+import org.apache.logging.log4j.core.util.Assert;
 import org.junit.jupiter.api.Test;
 
 import static com.cm6123.wormhole.dice.DiceMode.automatic;
@@ -113,6 +114,29 @@ public class PlayerSuite {
         controller.namePlayer(0, "Jeremy");
         controller.diceMode(0, manual);
         assertEquals(manual, controller.getDice(0));
+    }
+
+    @Test
+    public void shouldFindWinner() {
+        GameBoard gb = new GameBoard(5);
+        PlayerController controller = new PlayerController(2);
+        controller.initialisePlayers(1);
+        controller.namePlayer(0, "Toby");
+        controller.movePlayer(0, 28);
+        assertEquals("Toby", controller.getWinner().getName());
+    }
+
+    @Test
+    public void shouldBeAbleToGetNextPlayer() {
+        GameBoard gb = new GameBoard(5);
+        PlayerController controller = new PlayerController(2);
+        controller.initialisePlayers(1);
+        controller.namePlayer(0, "Toby");
+        assertEquals(0, controller.getCurrentPlayer());
+        controller.nextPlayer();
+        assertEquals(1, controller.getCurrentPlayer());
+        controller.nextPlayer();
+        assertEquals(0, controller.getCurrentPlayer());
     }
 }
 

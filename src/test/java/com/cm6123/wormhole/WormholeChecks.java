@@ -48,10 +48,21 @@ public class WormholeChecks {
         ArrayList<WormholeEntry> entryWormholeList = GameBoard.getEntryWormholeList();
         gbd.addWormhole(5, WormholeType.positive,8);
         assertEquals(8, entryWormholeList.get(0).getExit());
+
+        gbd = new GameBoard(5);
+        entryWormholeList = GameBoard.getEntryWormholeList();
+        gbd.addWormhole(15, WormholeType.negative,19);
+        assertEquals(15, entryWormholeList.get(0).getExit());
+
+        gbd = new GameBoard(5);
+        entryWormholeList = GameBoard.getEntryWormholeList();
         gbd.addWormhole(22, WormholeType.negative,8);
-        assertEquals(8, entryWormholeList.get(1).getExit());
+        assertEquals(8, entryWormholeList.get(0).getExit());
+
+         gbd = new GameBoard(5);
+        entryWormholeList = GameBoard.getEntryWormholeList();
         gbd.addWormhole(22, WormholeType.positive,8);
-        assertEquals(22, entryWormholeList.get(2).getExit());
+        assertEquals(22, entryWormholeList.get(0).getExit());
 
     }
 
@@ -70,4 +81,14 @@ public class WormholeChecks {
         assertEquals(gbd.getExitHoles(),"8, ");
 
     }
+
+    @Test
+    public void shouldGetEntryHoles(){
+        GameBoard gbd = new GameBoard(5);
+        gbd.addWormhole(5, WormholeType.positive,8);
+        assertEquals(5, gbd.getEntryHole(5).getPosition());
+        assertNull(gbd.getEntryHole(7));
+    }
+
+
 }

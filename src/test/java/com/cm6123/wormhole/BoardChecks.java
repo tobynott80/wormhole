@@ -14,4 +14,11 @@ public class BoardChecks {
         GameBoard newBoard = new GameBoard(5);
         assertEquals(newBoard.getBoardSize(), 25);
     }
+
+    @Test
+    public void shouldBeAbleToCreateBoardOf10() {
+        GameBoard newBoard = new GameBoard(10);
+        assertEquals(newBoard.getBoardSize(), 100);
+    }
+
 }
