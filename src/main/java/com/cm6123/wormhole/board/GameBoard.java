@@ -33,11 +33,18 @@ public final class GameBoard {
     /**
      * ArrayList for holding the entry wormhole objects.
      */
-    public static ArrayList<WormholeEntry> entryWormholeList = new ArrayList<WormholeEntry>();
+    private static ArrayList<WormholeEntry> entryWormholeList = new ArrayList<WormholeEntry>();
     /**
      * ArrayList for holding the exit wormhole objects.
      */
-    public static ArrayList<WormholeExit> exitWormholeList = new ArrayList<WormholeExit>();
+    private static ArrayList<WormholeExit> exitWormholeList = new ArrayList<WormholeExit>();
+
+    /**
+     * @return Returns this list of wormhole exits
+     */
+    public ArrayList<WormholeExit> getexitWormholeList(){
+        return this.exitWormholeList;
+    }
 
 
     /**

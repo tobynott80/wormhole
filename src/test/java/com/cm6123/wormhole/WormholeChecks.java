@@ -1,13 +1,12 @@
 package com.cm6123.wormhole;
 
 import com.cm6123.wormhole.board.GameBoard;
+import com.cm6123.wormhole.board.WormholeEntry;
 import com.cm6123.wormhole.board.WormholeType;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static com.cm6123.wormhole.board.GameBoard.entryWormholeList;
-import static com.cm6123.wormhole.board.GameBoard.exitWormholeList;
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -46,6 +45,7 @@ public class WormholeChecks {
     @Test
     public void shouldBeAbleToFindNearestExit(){
         GameBoard gbd = new GameBoard(5);
+        ArrayList<WormholeEntry> entryWormholeList = GameBoard.getEntryWormholeList();
         gbd.addWormhole(5, WormholeType.positive,8);
         assertEquals(8, entryWormholeList.get(0).getExit());
         gbd.addWormhole(22, WormholeType.negative,8);

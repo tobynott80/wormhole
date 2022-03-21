@@ -1,8 +1,8 @@
 package com.cm6123.wormhole.board;
 
+import java.util.ArrayList;
 import java.util.Collections;
 
-import static com.cm6123.wormhole.board.GameBoard.exitWormholeList;
 
 /**
  * Subclass for an entry wormhole.
@@ -40,6 +40,7 @@ public final class WormholeEntry extends Wormhole {
      * @return The nearest exit wormhole integer
      */
     public int getExit() {
+        ArrayList<WormholeExit> exitWormholeList  = GameBoard.getExitWormholeList();
         Collections.shuffle(exitWormholeList);
         if (this.polarity == WormholeType.positive) {
             for (WormholeExit exit : exitWormholeList) {

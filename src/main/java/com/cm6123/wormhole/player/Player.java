@@ -4,6 +4,8 @@ import com.cm6123.wormhole.board.GameBoard;
 import com.cm6123.wormhole.board.WormholeEntry;
 import com.cm6123.wormhole.dice.DiceMode;
 
+import java.util.ArrayList;
+
 
 /**
  * Class to manage an individual player and their actions.
@@ -54,8 +56,9 @@ public class Player {
      */
     public void movePlayer(final int squareDistance) {
         int targetSquare = this.getPosition() + squareDistance;
-        position = targetSquare; //move the player to the
-        for (WormholeEntry wormhole : GameBoard.entryWormholeList) {
+        position = targetSquare; //move the player to the target square
+        ArrayList<WormholeEntry> entryWormholeList = GameBoard.getEntryWormholeList();
+        for (WormholeEntry wormhole : entryWormholeList) {
             if (targetSquare == wormhole.getPosition()) {
                 //player has landed on a wormhole, change postion to the nearest exit wormhole
                 //If no exit wormhole is provided, .getExit() will just return the current position.

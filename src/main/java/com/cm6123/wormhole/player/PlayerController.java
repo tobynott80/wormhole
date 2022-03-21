@@ -2,6 +2,7 @@ package com.cm6123.wormhole.player;
 
 import com.cm6123.wormhole.board.GameBoard;
 import com.cm6123.wormhole.board.Wormhole;
+import com.cm6123.wormhole.board.WormholeEntry;
 import com.cm6123.wormhole.dice.DiceMode;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public final class PlayerController {
      * Array list to hold each player objects.
      */
     private ArrayList<Player> playerList = new ArrayList<Player>();
+
     /**
      * Which player number is the current player.
      */
@@ -73,8 +75,9 @@ public final class PlayerController {
      * @return True if a wormhole, false if not.
      */
     public boolean checkWormholes(final int testLocation) {
+        ArrayList<WormholeEntry> entryWormholeList = GameBoard.getEntryWormholeList();
         for (Player player: playerList) {
-            for (Wormhole wormhole: GameBoard.entryWormholeList){
+            for (Wormhole wormhole: entryWormholeList){
                 if (testLocation == wormhole.getPosition()){
                     //player has landed on a wormhole
                     return true;
