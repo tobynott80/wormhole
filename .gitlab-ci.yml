@@ -55,7 +55,7 @@ build:gradle:
 
 test-jdk11:
   stage: test
-  image: gradle:6.6.1-jdk11
+  image: gradle:jdk11
   script:
     - 'gradle test jacocoTestReport' # jacoco must be configured to create an xml report
   artifacts:
