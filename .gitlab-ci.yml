@@ -76,7 +76,6 @@ coverage-jdk11:
     - python /opt/cover2cover.py build/reports/jacoco/test/jacocoTestReport.xml $CI_PROJECT_DIR/src/main/java/ > build/cobertura.xml
     - cat build/cobertura.xml
   needs: ["test-jdk11"]
-  coverage: '/branch-rate="\d+\.\d+/'
   artifacts:
     paths:
       - build/cobertura.xml
