@@ -34,6 +34,10 @@ assemble:gradle:
     - tags
   script:
     - ./gradlew shadowJar
+  artifacts:
+    paths:
+      - ./build/libs/*.jar
+      - ./build/libs/*.log
 
 build:gradle:
   stage: build
