@@ -29,7 +29,9 @@ public class CoreScenariosTests {
         assertEquals(controller.getPosition(0),1); //check that player 1 has been initialised and is at the correct position
         controller.movePlayer(0,3); //rolls a 3
         controller.movePlayer(0,4); //rolls a 4
+        controller.nextPlayer(); //change to player 2's turn
         assertEquals(controller.getPosition(0),8); //check that player 1 actually lands on square 8
+        assertEquals(1, controller.getCurrentPlayer()); //check player 2 (1) is the current player
 
     }
 
@@ -50,9 +52,11 @@ public class CoreScenariosTests {
         GameBoard gb = new GameBoard(3); //initialise new gameboard of width 3
         PlayerController controller = new PlayerController(2); //create new 2 player controller
         controller.initialisePlayers(1); //initialise players starting at 1
+        controller.namePlayer(0, "Toby");
         controller.movePlayer(0, 5); //rolls a 5
         controller.movePlayer(0, 6); //rolls a 6
-        assertTrue(controller.gameOver()); //checks if player has won
+        assertTrue(controller.gameOver()); //check game is over
+        assertEquals("Toby", controller.getWinner().getName()); //check player 1 is the winner
     }
 
     @Test
@@ -74,10 +78,12 @@ public class CoreScenariosTests {
         for (Player player: controller.getPlayerList()) {
             player.movePlayer(aDice.roll());    //roll each dice
             player.movePlayer(bDice.roll());    //roll each dice
+            controller.nextPlayer();    //change to player 2's go
         }
         for (Player player: controller.getPlayerList()) {
             assertNotEquals(player.getPosition(),1); //assert that each player has succsessfully moved past square 1
         }
+        assertEquals(0, controller.getCurrentPlayer()); //assert that it is now player 1's (0) go
 
     }
     @Test
@@ -95,6 +101,13 @@ public class CoreScenariosTests {
         gb.addWormhole(7, WormholeType.positive, 20);
         controller.movePlayer(0, 4);
         controller.movePlayer(0, 2);
+        controller.nextPlayer();    //change to player 2's go
         assertEquals(controller.getPosition(0), 20); //check that player succsessfully moved to square 20 after landing on the wormhole
+        assertEquals(1, controller.getCurrentPlayer()); //check it's player 2's (1) turn
+    }
+
+    @Test
+    public void shouldBeAbleToCompleteTest5 () {
+
     }
 }
