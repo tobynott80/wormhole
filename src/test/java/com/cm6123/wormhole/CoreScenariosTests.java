@@ -108,6 +108,16 @@ public class CoreScenariosTests {
 
     @Test
     public void shouldBeAbleToCompleteTest5 () {
-
+        /**
+         * A game is being played on a board of size 5 with a positive wormhole from square 6 to square 20 and all players are on square 1 and it is player 1's turn
+         *
+         * Player 1 rolls a 3 and 3
+         *
+         * Then Player 1 should be on square 20 and it is player 2's turn	N/A
+         */
+        GameBoard gb = new GameBoard(5);
+        PlayerController controller = new PlayerController(2);
+        controller.initialisePlayers(1);
+        gb.addWormhole(6, WormholeType.positive, 20);
     }
 }
