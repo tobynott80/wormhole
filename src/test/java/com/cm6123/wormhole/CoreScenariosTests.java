@@ -102,7 +102,7 @@ public class CoreScenariosTests {
         controller.movePlayer(0, 4);
         controller.movePlayer(0, 2);
         controller.nextPlayer();    //change to player 2's go
-        assertEquals(controller.getPosition(0), 20); //check that player succsessfully moved to square 20 after landing on the wormhole
+        assertEquals(20, controller.getPosition(0)); //check that player succsessfully moved to square 20 after landing on the wormhole
         assertEquals(1, controller.getCurrentPlayer()); //check it's player 2's (1) turn
     }
 
@@ -118,6 +118,110 @@ public class CoreScenariosTests {
         GameBoard gb = new GameBoard(5);
         PlayerController controller = new PlayerController(2);
         controller.initialisePlayers(1);
-        gb.addWormhole(6, WormholeType.positive, 20);
+        gb.addWormhole(7, WormholeType.positive, 20);
+        controller.movePlayer(0, 3);
+        controller.movePlayer(0, 3);
+        controller.nextPlayer();    //change to player 2's go
+        assertEquals(20, controller.getPosition(0)); //check that player succsessfully moved to square 20 after landing on the wormhole
+        assertEquals(1, controller.getCurrentPlayer()); //check it's player 2's (1) turn
     }
+
+    @Test
+    public void shouldBeAbleToCompleteTest6 () {
+        /**
+         * A game is being played on a board of size 5 with a negative wormhole from square 11 to square 2 and all players are on square 1 and it is player 1's turn
+         *
+         * Player 1 rolls a 6 and 4
+         *
+         * Then Player 1 should be on square 2 and it is player 2's turn
+         */
+        GameBoard gb = new GameBoard(5);
+        PlayerController controller = new PlayerController(2);
+        controller.initialisePlayers(1);
+        gb.addWormhole(11, WormholeType.negative, 2);
+        controller.movePlayer(0, 6);
+        controller.movePlayer(0, 4);
+        controller.nextPlayer();    //change to player 2's go
+        assertEquals(2, controller.getPosition(0)); //check that player succsessfully moved to square 20 after landing on the wormhole
+        assertEquals(1, controller.getCurrentPlayer()); //check it's player 2's (1) turn
+    }
+
+    @Test
+    public void shouldBeAbleToCompleteTest7 () {
+        /**
+         * A game is being played on a board of size 5 with a negative wormhole from square 11 to square 2 and all players are on square 1 and it is player 1's turn
+         *
+         * Player 1 rolls a 5 and 5
+         *
+         * Then Player 1 should be on square 10 and it is player 2's turn
+         */
+        GameBoard gb = new GameBoard(5);
+        PlayerController controller = new PlayerController(2);
+        controller.initialisePlayers(1);
+        gb.addWormhole(11, WormholeType.negative, 2);
+        // Logic for player rolling a double is currently in applcation class (line 141)
+        // Ideally this should be moved for testing purposes
+        // For the time being, the application class code is recreated below for testing
+        Integer roll1 = 5;
+        Integer roll2 = 5;
+        if(gb.getEntryWormholeList().get(0).getPolarity().equals(WormholeType.negative) && roll1.equals(roll2)){
+            //if player lands on neg. wormhole but rolls a double, do not move
+            controller.movePlayer(0, 0);
+        }
+        controller.nextPlayer();    //change to player 2's go
+        assertEquals(1, controller.getPosition(0)); //check that player succsessfully moved to square 20 after landing on the wormhole
+        assertEquals(1, controller.getCurrentPlayer()); //check it's player 2's (1) turn
+    }
+
+    @Test
+    public void shouldBeAbleToCompleteTest8 () {
+        /**
+         * A game is being played on a board of size 5 with a positive wormhole from square 7 to square 20 and 2 players are on square 1.
+         * When Player 1 rolls a 4 and 2 And Player 2 rolls a 1 and 1, And Player 1 rolls a 2 and 3
+         * Then Player 1 should be on square 25 and should be declared the winner
+         */
+        GameBoard gb = new GameBoard(5);
+        PlayerController controller = new PlayerController(2);
+        controller.initialisePlayers(1);
+        controller.namePlayer(0, "Toby");
+        gb.addWormhole(7, WormholeType.positive, 20);
+        controller.movePlayer(controller.getCurrentPlayer(), 4);
+        controller.movePlayer(controller.getCurrentPlayer(), 2);
+        controller.nextPlayer();    //change to player 2's go
+        controller.movePlayer(controller.getCurrentPlayer(), 1);
+        controller.movePlayer(controller.getCurrentPlayer(), 1);
+        controller.nextPlayer();
+        controller.movePlayer(controller.getCurrentPlayer(), 2);
+        controller.movePlayer(controller.getCurrentPlayer(), 3);
+        assertEquals("Toby", controller.getWinner().getName());
+        assertEquals(25, controller.getPosition(0));
+    }
+
+    @Test
+    public void shouldBeAbleToCompleteTest9 () {
+        /**
+         * A game is being played on a boardof size 5 with a positive wormhole from square 6 to square 20
+         * and 2 players are on square 1 and it is player 1’s turn
+         *
+         * When Player 1 rolls a 4 and 2, Player 2 rolls a 1 and 1, Player 1 rolls a 3 and 3
+         *
+         * Then Player 1 should be on square 26 and should be declared the winner
+         */
+        GameBoard gb = new GameBoard(5);
+        PlayerController controller = new PlayerController(2);
+        controller.initialisePlayers(1);
+        controller.namePlayer(0, "Toby");
+        gb.addWormhole(7, WormholeType.positive, 20);
+        controller.movePlayer(controller.getCurrentPlayer(), 4);
+        controller.movePlayer(controller.getCurrentPlayer(), 2);
+        controller.nextPlayer();    //change to player 2's go
+        controller.movePlayer(controller.getCurrentPlayer(), 1);
+        controller.movePlayer(controller.getCurrentPlayer(), 1);
+        controller.nextPlayer();
+        controller.movePlayer(controller.getCurrentPlayer(), 3);
+        controller.movePlayer(controller.getCurrentPlayer(), 3);
+        assertEquals("Toby", controller.getWinner().getName());
+        assertEquals(26, controller.getPosition(0));
+    }
+
 }
