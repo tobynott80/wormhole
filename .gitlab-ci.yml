@@ -3,8 +3,8 @@ image: openjdk:11-jdk
 default:
   tags:
     #- comsc-ci
-    #- general-docker
-    - tobyn
+    - general-docker
+    #- tobyn
 
 
 
