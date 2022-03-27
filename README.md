@@ -3,6 +3,13 @@ Student No- 21048229
 
 Module - CM6123 & CM6121
 
+## Usage
+
+Download the [latest jar](https://git.cardiff.ac.uk/c21048229/wormhole-21048229-2022/-/releases) or clone and build a jar with 
+`.\gradlew shadowJar`
+
+`java -jar submission-n`
+
 ## Checkstyle Errors
 
 [Latest Checkstyle Errors](https://c21048229.gitpages.cardiff.ac.uk/wormhole-21048229-2022/checkstyle/main.html) (Needs Uni VPN Connection)
@@ -17,3 +24,4 @@ Module - CM6123 & CM6121
 ## Gradle Tests
 
 [Self Testing Code Results](https://c21048229.gitpages.cardiff.ac.uk/wormhole-21048229-2022/tests/test/packages/com.cm6123.wormhole.html) (Needs Uni VPN Connection)
+
