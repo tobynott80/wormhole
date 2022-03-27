@@ -4,18 +4,13 @@ default:
   tags:
     #- comsc-ci
     - general-docker
-    #- tobyn
-
 
 
 stages:
   - assemble
   - build
   - publish
-  - test
-  - visualize
   - deploy
-
 
 before_script:
   - echo $GRADLE_HOME
@@ -35,10 +30,6 @@ assemble:gradle:
     - tags
   script:
     - ./gradlew shadowJar
-  artifacts:
-    paths:
-      - ./build/libs/*.jar
-      - ./build/libs/*.log
 
 build:gradle:
   stage: build
@@ -46,8 +37,6 @@ build:gradle:
     - tags
   script:
     - ./gradlew buildAndReport
-    - cat ./build/jacocoHtml/index.html
-  
   artifacts:
     name: "$CI_JOB_NAME"
     paths:
@@ -56,10 +45,8 @@ build:gradle:
       - ./build/jacocoHtml
       - ./build/libs/*.jar
       - ./build/libs/*.log
-      - ./build/reports/pitest
+      #- ./build/reports/pitest
     expire_in: 4 week
-
-
 
 
 pages:
@@ -83,7 +70,3 @@ pages:
 
   only:
     - tags
-
-
-
-
