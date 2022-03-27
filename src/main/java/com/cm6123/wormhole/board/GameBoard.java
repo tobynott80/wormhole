@@ -8,7 +8,6 @@ import java.util.Collections;
 /**
  * Class to manage the actions and methods of the gameboard.
  */
-@SuppressWarnings("unchecked")
 public final class GameBoard {
 
     /**

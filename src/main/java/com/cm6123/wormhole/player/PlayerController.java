@@ -1,7 +1,6 @@
 package com.cm6123.wormhole.player;
 
 import com.cm6123.wormhole.board.GameBoard;
-import com.cm6123.wormhole.board.Wormhole;
 import com.cm6123.wormhole.board.WormholeEntry;
 import com.cm6123.wormhole.dice.DiceMode;
 
@@ -77,7 +76,7 @@ public final class PlayerController {
     public boolean checkWormholes(final int testLocation) {
         ArrayList<WormholeEntry> entryWormholeList = GameBoard.getEntryWormholeList();
         for (Player player: playerList) {
-            for (Wormhole wormhole: entryWormholeList){
+            for (WormholeEntry wormhole: entryWormholeList){
                 if (testLocation == wormhole.getPosition()){
                     //player has landed on a wormhole
                     return true;

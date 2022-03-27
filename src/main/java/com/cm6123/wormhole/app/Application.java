@@ -23,8 +23,7 @@ public final class Application {
     }
 
     /**
-     * main entry point.  If args provided, result is displayed and program exists. Otherwise, user is prompted for
-     * input.
+     * main entry point.
      *
      * @param args command line args.
      */
