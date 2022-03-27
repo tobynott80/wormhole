@@ -11,7 +11,7 @@ public class Wormhole {
      * Constructor of wormhole object.
      * @param pos Position of wormhole
      */
-    public Wormhole(final int pos) {
+    protected Wormhole(final int pos) {
         this.position =  pos;
     }
 

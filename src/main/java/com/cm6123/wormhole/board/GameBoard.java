@@ -50,9 +50,14 @@ public final class GameBoard {
      * @param width with of the gameboard (between 5 and 10 in deployment).
      */
     public GameBoard(final int width) {
-        this.boardWidth = width;
-        this.entryWormholeList = new ArrayList<WormholeEntry>();
-        this.exitWormholeList = new ArrayList<WormholeExit>();
+        if (width >= 3 && width <= 10) {
+            this.boardWidth = width;
+            this.entryWormholeList = new ArrayList<WormholeEntry>();
+            this.exitWormholeList = new ArrayList<WormholeExit>();
+        } else {
+            throw new ArithmeticException("Board width must be between 3 and 10");
+        }
+
     }
 
     /**

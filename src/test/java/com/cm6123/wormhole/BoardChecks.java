@@ -21,4 +21,15 @@ public class BoardChecks {
         assertEquals(newBoard.getBoardSize(), 100);
     }
 
+    @Test
+    public void shouldNotCreateOutofBounds() {
+        assertThrows(ArithmeticException.class, () -> {
+            GameBoard newBoard = new GameBoard(1);
+        }, "Board width must be between 3 and 10");
+        assertThrows(ArithmeticException.class, () -> {
+            GameBoard newBoard = new GameBoard(11);
+        }, "Board width must be between 3 and 10");
+
+    }
+
 }

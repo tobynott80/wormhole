@@ -22,14 +22,14 @@ public final class Application {
     private Application() {
     }
 
+
+
     /**
      * main entry point.
      *
      * @param args command line args.
      */
     public static void main(final String[] args) {
-
-
         LOGGER.info("Application Started with args:{}", String.join(",", args));
 
         System.out.println("Hello World.  Welcome to Wormhole.");
@@ -38,7 +38,6 @@ public final class Application {
 
             //code adapted from:
             // https://stackoverflow.com/questions/3059333/validating-input-using-java-util-scanner
-
             Scanner sc = new Scanner(System.in);
             int boardWidth;
             do {
@@ -51,7 +50,16 @@ public final class Application {
                 boardWidth = sc.nextInt();
             } while (boardWidth < 5 || boardWidth > 10); //ensure that the entered width is within the valid range.
             LOGGER.info("Creating a gameboard with width " + boardWidth + " and of size " + boardWidth * boardWidth);
-            GameBoard gb = new GameBoard(boardWidth);
+            GameBoard gb = null;
+            try{  //try creating new gameboard with given input
+                gb = new GameBoard(boardWidth);
+            } catch (Exception e){  //if gameboard was not correctly initialised
+                e.printStackTrace();
+                System.out.println("Error initialising gameboard - is board width correct?");
+                System.out.println("Exiting");
+                System.exit(1);
+            }
+
             LOGGER.info("Created new gameboard");
             gb.initialiseWormholes();
             LOGGER.info("Initialised wormholes");
@@ -147,12 +155,9 @@ public final class Application {
                     controller.movePlayer(currentPlayer, squareDistance);
                     System.out.println(controller.getName(currentPlayer) + " has moved to square " + controller.getPosition(currentPlayer));
                 }
-
-
                 controller.nextPlayer();
             }
             System.out.println("Cogratulations " + controller.getWinner().getName() + "! You won!");
-
 
             String usrIput = "";
             boolean validInput = false;
@@ -169,10 +174,7 @@ public final class Application {
                     LOGGER.info("Player wishes to end application");
                 }
             }
-
         }
-
-
         LOGGER.info("Application closing");
     }
 
