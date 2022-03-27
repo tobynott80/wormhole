@@ -25,3 +25,6 @@ Download the [latest jar](https://git.cardiff.ac.uk/c21048229/wormhole-21048229-
 
 [Self Testing Code Results](https://c21048229.gitpages.cardiff.ac.uk/wormhole-21048229-2022/tests/test/packages/com.cm6123.wormhole.html) (Needs Uni VPN Connection)
 
+## .gitlab-ci.yml
+
+Please note that the [.gitlab-ci.yml](https://git.cardiff.ac.uk/c21048229/wormhole-21048229-2022/-/blob/master/.gitlab-ci.yml) file has been changed a little, however it is it now identicle to the forked [.gitlab-ci.yml](https://git.cardiff.ac.uk/ase-sds21/ase-sds2/assessment-1-2022-starter/-/blob/master/.gitlab-ci.yml), minus the pitest and runner fixes.
