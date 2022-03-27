@@ -12,10 +12,6 @@ public final class WormholeEntry extends Wormhole {
      * Polarity of entry - either positive or negative.
      */
     private final WormholeType polarity;
-    /**
-     * Postion of wormhole.
-     */
-    private final Integer position;
 
     /**
      * @param polar Polarity - either positive or negative.
@@ -24,7 +20,6 @@ public final class WormholeEntry extends Wormhole {
     public WormholeEntry(final WormholeType polar, final Integer pos) {
         super(pos);
         this.polarity = polar;
-        this.position = pos;
     }
 
     /**
@@ -44,18 +39,18 @@ public final class WormholeEntry extends Wormhole {
         Collections.shuffle(exitWormholeList);
         if (this.polarity == WormholeType.positive) {
             for (WormholeExit exit : exitWormholeList) {
-                if (exit.getPosition() > position) {
+                if (exit.getPosition() > super.getPosition()) {
                     return exit.getPosition();
                 }
             }
         } else {
             for (WormholeExit exit : exitWormholeList) {
-                if (exit.getPosition() < position) {
+                if (exit.getPosition() < super.getPosition()) {
                     return exit.getPosition();
                 }
             }
         }
-        return position;
+        return super.getPosition();
 
 
     }
